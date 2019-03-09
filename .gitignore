@@ -2,8 +2,6 @@
 *.py[cod]
 .*
 __pycache__
-/logs/*
 
-!.flake8
 !.gitignore
 !.env
