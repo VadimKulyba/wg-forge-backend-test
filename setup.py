@@ -5,10 +5,19 @@ VERSION = '0.1'
 
 
 REQUIREMENTS = [
+    'flasgger==0.9.2',
+    'flask==1.0.2',
+    'flask-migrate==2.4.0',
+    'flask-script==2.0.6',
+    'flask-sqlalchemy==2.3.2',
+    'gunicorn==19.9.0',
+    'psycopg2-binary==2.7.7',
 ]
 
 
 DEV_REQUIREMENTS = [
+    'flake8==3.7.7',
+    'ipython==7.3.0',
 ]
 
 

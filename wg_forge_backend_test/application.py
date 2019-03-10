@@ -3,8 +3,7 @@ import logging
 import flask
 
 from . import extensions
-from . import conf
-
+from .conf import Config
 from .cats.blueprint import cats_blueprint
 
 __all__ = [
@@ -23,7 +22,7 @@ class Application(flask.Flask):
     ) -> flask.Flask:
         """Flask app builder."""
         app = cls(app_name)
-        app.config.from_object(conf)
+        app.config.from_object(Config)
         app.config.from_object(config)
         app.extensions_fabric()
         app.blueprint_fabric()
