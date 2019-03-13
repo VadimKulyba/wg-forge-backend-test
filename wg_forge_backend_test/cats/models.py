@@ -26,7 +26,7 @@ COLOR_ENUM = Enum(
     'black & white',
     'red',
     'red & white',
-    'red & black & white', 
+    'red & black & white',
     name="cat_color", create_type=False)
 
 
@@ -65,14 +65,14 @@ class CatStatistic(Base):
     tail_length_median = Column('tail_length_median', Numeric)
     tail_length_mode = Column(
         'tail_length_mode',
-        postgresql.ARRAY(Integer, dimensions=2)
+        postgresql.ARRAY(Integer, as_tuple=True)
     )
 
     whiskers_length_mean = Column('whiskers_length_mean', Numeric)
     whiskers_length_median = Column('whiskers_length_median', Numeric)
     whiskers_length_mode = Column(
         'whiskers_length_mode',
-        postgresql.ARRAY(Integer, dimensions=2)
+        postgresql.ARRAY(Integer, as_tuple=True)
     )
 
     __table_args__ = (
@@ -87,6 +87,11 @@ class CatStatistic(Base):
 
 
 Base.prepare(engine, reflect=True)
+
 Cat.query = session.query(Cat)
 CatColorInfo.query = session.query(CatColorInfo)
 CatStatistic.query = session.query(CatStatistic)
+
+session.close()
+
+from . import events

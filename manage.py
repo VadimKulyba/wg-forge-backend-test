@@ -3,11 +3,12 @@ import flask_script
 from wg_forge_backend_test import create_application
 from wg_forge_backend_test.extensions import database
 from wg_forge_backend_test.cats import models
-
+from wg_forge_backend_test.commands import DatabaseFiller
 
 manager = flask_script.Manager(create_application)
 manager.add_command("runserver", flask_script.Server())
 manager.add_command("shell", flask_script.Shell())
+manager.add_command("fill_database", DatabaseFiller())
 
 
 @manager.shell

@@ -12,6 +12,7 @@ REQUIREMENTS = [
     'flask-sqlalchemy==2.3.2',
     'gunicorn==19.9.0',
     'psycopg2-binary==2.7.7',
+    'scipy==1.2.1'
 ]
 
 
@@ -29,4 +30,9 @@ setuptools.setup(
     version=VERSION,
     install_requires=REQUIREMENTS,
     extras_require={'dev': DEV_REQUIREMENTS},
+    entry_points={
+        'console_scripts': [
+            'prepare_db=wg_forge_backend_test.helpers:prepare_db',
+        ]
+    },
 )
