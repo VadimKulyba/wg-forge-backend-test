@@ -11,4 +11,3 @@ class Config(object):
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PACKAGE_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
-    MIGRATIONS_DIRECTORY = os.path.join(PACKAGE_DIRECTORY, 'migrations')

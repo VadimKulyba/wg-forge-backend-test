@@ -42,6 +42,10 @@ class Cat(Base):
     tail_length = Column('tail_length', Integer)
     whiskers_length = Column('whiskers_length', Integer)
 
+    def __repr__(self) -> str:
+        return '<Cat [name={}, color={}, tail_length={}, whiskers_length={}]>'.format(
+            self.name, self.color, self.tail_length, self.whiskers_length)
+
 
 class CatColorInfo(Base):
     """Callback cats model for color info."""
@@ -54,6 +58,10 @@ class CatColorInfo(Base):
     __table_args__ = (
         PrimaryKeyConstraint(color, count),
     )
+
+    def __repr__(self) -> str:
+        return 'CatColorInfo [color={}, count={}]'.format(
+            self.color, self.count)
 
 
 class CatStatistic(Base):
@@ -84,6 +92,10 @@ class CatStatistic(Base):
             whiskers_length_median,
             whiskers_length_mode),
     )
+
+    def __repr__(self) -> str:
+        return 'CatStatistic [tail_length_mean={}, whiskers_length_mean={}]'.format(
+            self.tail_length_mean, self.whiskers_length_mean)
 
 
 Base.prepare(engine, reflect=True)
