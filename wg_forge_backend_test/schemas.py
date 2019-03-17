@@ -3,7 +3,7 @@ import typing
 import marshmallow_sqlalchemy
 import sqlalchemy.orm.session
 
-from .errors import ValidationError
+from .errors import ValidationDataError
 from .extensions import database
 
 __all__ = [
@@ -27,9 +27,9 @@ class BaseSchema(marshmallow_sqlalchemy.ModelSchema):
         *args,
         **kwargs,
     ) -> None:
-        """Raises of data invalid. ???"""
+        """Raises of data invalid."""
         validation_data = super().validate(
             data, session=session, *args, **kwargs)
         if validation_data:
-            raise ValidationError(validation_data)
+            raise ValidationDataError(validation_data)
         return None

@@ -12,6 +12,7 @@ __all__ = [
     'Cat',
     'CatColorInfo',
     'CatStatistic',
+    'COLOR_TUPLE',
 ]
 
 Base = automap_base()
@@ -19,14 +20,16 @@ Base = automap_base()
 engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
 session = Session(engine)
 
-
-COLOR_ENUM = Enum(
+COLOR_TUPLE = (
     'black',
     'white',
     'black & white',
     'red',
     'red & white',
-    'red & black & white',
+    'red & black & white')
+
+COLOR_ENUM = Enum(
+    *COLOR_TUPLE,
     name="cat_color", create_type=False)
 
 

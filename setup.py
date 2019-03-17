@@ -7,6 +7,7 @@ VERSION = '0.1'
 REQUIREMENTS = [
     'flasgger==0.9.2',
     'flask==1.0.2',
+    'flask-limiter==1.0.1'
     'flask-migrate==2.4.0',
     'flask-script==2.0.6',
     'flask-sqlalchemy==2.3.2',

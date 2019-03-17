@@ -1,16 +1,16 @@
 import typing
 
 __all__ = [
-    'ValidationError',
+    'ValidationDataError',
 ]
 
 
-class ValidationError(Exception):
+class ValidationDataError(Exception):
     """Init custom validate data error."""
     def __init__(self, data: typing.Dict, message: str = 'Invalid data.'):
         self.message = message
         self.data = data
 
     def __repr__(self) -> str:
-        return '<ValidationError [message={}, data={}]>'.format(
+        return '<ValidationDataError [message={}, data={}]>'.format(
             self.message, self.data)

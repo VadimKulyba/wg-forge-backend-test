@@ -26,24 +26,34 @@ class Application(flask.Flask):
         app.config.from_object(config)
         app.extensions_fabric()
         app.blueprint_fabric()
+        app.logging_fabric()
         return app
 
     def blueprint_fabric(self) -> None:
         """Registration cats blueprint."""
         self.register_blueprint(
             cats_blueprint,
-            url_prefix='/'
-        )
+            url_prefix='/')
 
     def extensions_fabric(self) -> None:
         """Load flask extension."""
         extensions.database.init_app(self)
+        extensions.limiter.init_app(self)
         extensions.migrate.init_app(
             self,
             extensions.database,
             directory=self.config['MIGRATIONS_DIRECTORY'],
         )
         extensions.swagger.init_app(self)
+
+    def logging_fabric(self) -> None:
+        """App logging fabric."""
+        logging.basicConfig(
+            format=(
+                '[%(levelname)s] %(process)d '
+                '%(asctime)s - (%(name)s): %(message)s'
+            )
+        )
 
 
 def create_application(
