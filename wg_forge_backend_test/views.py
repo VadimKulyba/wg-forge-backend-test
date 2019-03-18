@@ -20,7 +20,7 @@ def create_instance(
     """Validata and create model instance."""
     schema.validate(data, session=session)  # base schema
     result = schema.load(data, session=session)  # custom schema (with params)
-    session = session or schema.sql_session
+    session = session or schema.sql_session  # check with line
 
     if commit:
         """Save deserialize object-data on db."""

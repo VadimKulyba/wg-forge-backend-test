@@ -16,18 +16,22 @@ from .. import extensions
 
 from ..conf import Config
 from ..extensions import limiter
+from ..views import create_instance
 
 from .models import Cat
-from .schemas import cats_schema
+from .schemas import cats_schema, cat_schema
 from .blueprint import cats_blueprint
 
 
 __all__ = [
     'ping',
     'index',
+    'create',
 ]
 
 ORDER_OPTIONS = ['desc', 'asc']
+
+logger = logging.getLogger('wg_forge_backend_test.cats.views')
 
 
 def request_params(name: str):
@@ -98,13 +102,21 @@ def index() -> typing.Tuple[flask.Response, int]:
     return flask.jsonify(result.data)
 
 
-@cats_blueprint.route('/cats', methods=['POST'])
+@cats_blueprint.route('/cat', methods=['POST'])
 def create() -> typing.Tuple[flask.Response, int]:
     """Push new cat in database."""
 
-    logging.debug("Start post request to '/cats'")
+    logger.debug("Start post request to '/cats'")
 
     try:
-        pass
-    except errors.ValidationDataError:
-        pass
+        cat = create_instance(cat_schema, flask.request.form.to_dict(), extensions.database.session)
+        logger.debug('Cat with name {!r} successfully created'.format(cat.name))
+    except errors.ValidationDataError as e:
+        logger.error("Request form is invalid: {!r}".format(e))
+        return flask.jsonify(**e.data), 400
+    except Exception as e:
+        logger.error("Cat not saving.")
+        logger.exception(e)
+        raise
+
+    return flask.jsonify(details=['OK']), 201

@@ -29,14 +29,17 @@ class CatSchema(schemas.BaseSchema):
     @validates_schema
     def validate_size(self, data):
         if data['tail_length'] < self.MIN_SIZE:
-            raise errors.ValidationDataError(data, 'Small tail_length size validation error.')
+            error_message = 'Small tail_length size validation error.'
+            raise errors.ValidationDataError({"name": [error_message]})
         if data['whiskers_length'] < self.MIN_SIZE:
-            raise errors.ValidationDataError(data, 'Small whiskers_length size validation error.')
+            error_message = 'Small whiskers_length size validation error.'
+            raise errors.ValidationDataError({"name": [error_message]})
 
     @validates('color')
     def validate_color(self, data):
         if data not in models.COLOR_TUPLE:
-            raise errors.ValidationDataError(data, 'Validation error, not supported color type.')
+            error_message = 'Validation error, not supported color type.'
+            raise errors.ValidationDataError({"name": [error_message]})
 
     class Meta(schemas.BaseSchema.Meta):
         """Cat's schema meta class."""

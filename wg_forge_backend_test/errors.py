@@ -1,3 +1,4 @@
+"""Define invalid data error for schemas."""
 import typing
 
 __all__ = [

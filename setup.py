@@ -31,9 +31,5 @@ setuptools.setup(
     version=VERSION,
     install_requires=REQUIREMENTS,
     extras_require={'dev': DEV_REQUIREMENTS},
-    entry_points={
-        'console_scripts': [
-            'prepare_db=wg_forge_backend_test.helpers:prepare_db',
-        ]
-    },
+    scripts=['bin/wg-forge-backend-test-runner'],
 )
